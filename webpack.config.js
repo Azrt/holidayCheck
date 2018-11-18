@@ -17,17 +17,21 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: "eslint-loader",
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
         loaders: "babel-loader",
         options: {
           presets: ["react", "stage-0", "es2015"],
           plugins: ["transform-class-properties", "transform-decorators-legacy"]
         }
-      }
+      },
+      {
+        test: /\.(jpg|jpeg|png|svg)(\?.*)?$/,
+        use: {
+          loader: 'file-loader', 
+          options: {
+            name: '[path][name].[ext]',
+          }
+        }
+      },
     ]
   },
   devServer: {
