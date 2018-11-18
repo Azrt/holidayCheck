@@ -7,7 +7,7 @@ export const Layout = (Component) => (
         <div className="container">
             <Header />
 
-            <section className="layoud__content">
+            <section className="layout__content">
                 <Component />
             </section>
         </div>

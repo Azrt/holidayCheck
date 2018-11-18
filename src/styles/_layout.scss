@@ -3,4 +3,9 @@
         background: #fff url('../assets/bg.jpg') no-repeat top center;
         padding-top: 50px;
     }
+
+    &__content {
+        background: $color-grey;
+        padding: 30px 30px 80px;
+    }
 }
