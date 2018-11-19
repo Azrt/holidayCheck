@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 
-import moment from 'moment'; 
+import moment from 'moment';
 
-import { Score } from './Score';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
+
+import {
+    CommentForm,
+    Score,
+    Comment,
+} from './';
 
 export default class Review extends Component {
     constructor(props) {
@@ -10,6 +17,7 @@ export default class Review extends Component {
 
         this.state = {
             clickableDescription: true,
+            displayCommentForm: false,            
         };
     }
 
@@ -31,6 +39,22 @@ export default class Review extends Component {
         }
 
         event.target.classList.add('review__description--full');
+    }
+
+    onCommentFormSubmit(comment) {
+        this.props.onSubmit(comment, this.props.id);
+    }
+
+    onCommentFormClose() {
+        this.setState({
+            displayCommentForm: false,
+        });
+    }
+
+    onAddCommentButtonClick() {
+        this.setState({
+            displayCommentForm: true,
+        });
     }
 
     render() {
@@ -64,11 +88,29 @@ export default class Review extends Component {
                     {this.props.description}
                 </p>
 
-                <div className="button__container">
-                    <button className="button">
-                        Add comment
-                    </button>
-                </div>
+                {this.state.displayCommentForm &&
+                 !this.props.comment &&
+                    <div className="review__comment-form">
+                        <FontAwesomeIcon
+                            icon={faTimesCircle}
+                            onClick={this.onCommentFormClose.bind(this)}
+                            className="review__comment-close"
+                        />
+                        <CommentForm onSubmit={this.onCommentFormSubmit.bind(this)} />
+                    </div>
+                }
+
+                {!!this.props.comment && <Comment {...this.props.comment} />}
+
+                {!this.props.comment &&
+                    <div className="button__container">
+                        <button
+                            onClick={this.onAddCommentButtonClick.bind(this)}
+                            className="button">
+                            Add comment
+                        </button>
+                    </div>
+                }
             </div>
         )
     }

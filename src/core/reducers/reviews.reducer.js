@@ -2,6 +2,8 @@ import {
     GET_REVIEWS_REQUEST,
     GET_REVIEWS_SUCCESS,
     GET_REVIEWS_ERROR,
+
+    ADD_COMMENT,
 } from '../constants';
 
 const reviewsInitialState = {
@@ -10,6 +12,7 @@ const reviewsInitialState = {
         isLoading: false,
         errors: {},
     },
+    comments: {},
 };
 
 export default function reducer(state = reviewsInitialState, action) {
@@ -41,6 +44,15 @@ export default function reducer(state = reviewsInitialState, action) {
                     ...state.list,
                     isLoading: false,
                     errors: action.payload,
+                },
+            };
+
+        case ADD_COMMENT:
+            return {
+                ...state,
+                comments: {
+                    ...state.comments,
+                    ...action.payload,
                 },
             };
 
