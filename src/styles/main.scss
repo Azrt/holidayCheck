@@ -2,5 +2,10 @@
 @import 'base';
 @import 'fonts'; 
 @import 'layout';
+@import 'buttons';
 
 @import 'header';
+
+@import 'components/review';
+@import 'components/loader';
+@import 'components/score';

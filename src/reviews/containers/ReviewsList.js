@@ -6,19 +6,19 @@ import {
     getReviewsRequest,
 } from '../../core/actions/reviews.actions';
 
+import Review from '../components/Review';
+import { Loader } from '../../common/Loader';
+
 class ReviewsList extends Component {
     componentDidMount() {
         this.props.fetchReviews();
     }
-
-    componentDidUpdate() {
-        console.log(this.props)
-    }
         
     render() {
         return (
-            <div>
-               
+            <div class="review-list__container">
+                {!!this.props.list.data.length && this.props.list.data.map(review => <Review {...review} />)}
+                {this.props.list.isFetching && <Loader />}
             </div>
         );
     }
